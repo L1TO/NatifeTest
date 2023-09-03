@@ -1,28 +1,29 @@
 package com.example.natifetest.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.natifetest.data.repository.GifRepository
 import com.example.natifetest.model.Data
-import com.example.natifetest.model.GifModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 
 class MainViewModel(
     private val gifRepository: GifRepository
 ) : ViewModel() {
+    var gifs: Flow<PagingData<Data>>? = null
 
-    private val _gifs = MutableLiveData<GifModel>()
-    val gifs: LiveData<GifModel> = _gifs
+    private fun getGifs() {
+        gifs = gifRepository.getPagedGifs().cachedIn(viewModelScope)
+    }
 
-    fun getGifs() {
-        viewModelScope.launch {
-            _gifs.value = gifRepository.getGifs()
-        }
+    fun refresh() {
+        val _gifs = gifRepository.getPagedGifs().cachedIn(viewModelScope)
+        gifs = _gifs
     }
 
     init {
         getGifs()
     }
+
 }

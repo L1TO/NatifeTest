@@ -2,4 +2,6 @@
     <string name="app_name">NatifeTest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="load_error">Something went wrong</string>
+    <string name="try_again">Try again\n</string>
 </resources>
