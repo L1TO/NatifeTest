@@ -17,11 +17,6 @@ class MainViewModel(
         gifs = gifRepository.getPagedGifs().cachedIn(viewModelScope)
     }
 
-    fun refresh() {
-        val _gifs = gifRepository.getPagedGifs().cachedIn(viewModelScope)
-        gifs = _gifs
-    }
-
     init {
         getGifs()
     }

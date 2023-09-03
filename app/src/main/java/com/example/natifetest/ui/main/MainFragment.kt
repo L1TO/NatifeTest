@@ -72,7 +72,6 @@ class MainFragment : Fragment() {
 
         mainLoadStateHolder = DefaultLoadStateAdapter.Holder(
             binding.loadStateView,
-            binding.swipeRefreshLayout,
             tryAgainAction
         )
 
